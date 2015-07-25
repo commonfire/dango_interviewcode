@@ -1,5 +1,6 @@
 package dango_interviewcode_class1;
 
+
 public class StairMaxScore {
 	
 	private int max(int a,int b){
@@ -8,6 +9,11 @@ public class StairMaxScore {
 		return max;
 	}
 
+	/**
+	 * 楼梯取数问题
+	 * @param A  给定长度的整数数列，有正有负
+	 * @return   “指针”经过的数字之和的最大值
+	 */
 	private int computeMaxScore(int[] A){
 		int n = A.length;
 		int dp[] = new int[n+3];    //dp[i]为从第i个数字出发到达终点的最大分数
