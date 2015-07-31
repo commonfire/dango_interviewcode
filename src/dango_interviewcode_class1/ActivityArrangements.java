@@ -61,7 +61,7 @@ public class ActivityArrangements {
 		test.add(a1);
 		test.add(a2);
 		test.add(a3);
-		for(ACT a : arrangeActivity(test)){  //注意static方法可以不用自己类的main方法中不用写类名
+		for(ACT a : arrangeActivity(test)){  //注意static方法可以在本类的main方法中不用类名进行调用，在别的类调用要写
 			System.out.println(a.activityname);
 		}
 	}
