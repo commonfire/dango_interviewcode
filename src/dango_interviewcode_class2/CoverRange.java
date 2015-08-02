@@ -18,6 +18,11 @@ class Range{
 	}
 }
 
+/**
+ * @author zjd
+ * 覆盖区间问题。给定n个区间，找出满足下述条件的所含元素个数最少的集合：对于所给定的每个区间，都至少有
+ * 两个不同的整数属于该集合
+ */
 public class CoverRange {
 	
 	private boolean isContains(int a,ArrayList<Integer> b){
