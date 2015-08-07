@@ -1,8 +1,10 @@
 package dango_interviewcode_class3;
 
+import java.util.ArrayList;
+
 /**
  * @author zjd
- * 计算排序二叉树的种数
+ * 计算排序二叉树的种数以及可能的排序二叉树
  */
 public class GenSearchTree {
 	
@@ -39,10 +41,39 @@ public class GenSearchTree {
 		return record[n];	
 	}
 	
+	/**
+	 * 给定n，生成1~n的所有可能的排序二叉树
+	 * @param n    给定的n
+	 * @return     返回所有可能的排序二叉树
+	 */
+	private ArrayList<Node> generateTrees(int n){
+		return createTree(1, n);
+	}
+	
+	private ArrayList<Node> createTree(int start,int end){
+		ArrayList<Node> results = new ArrayList<Node>();
+		if(start > end){
+			results.add(null);
+			return results;
+		}
+		for(int k = start;k <= end;k++){
+			ArrayList<Node> left = createTree(start, k-1);
+			ArrayList<Node> right = createTree(k+1, end);
+			for(int i=0,j=0;i<left.size()&&j<right.size();i++,j++){
+				Node root = new Node(k);
+				root.left = left.get(i);
+				root.right = right.get(j);
+				results.add(root);
+			}
+		}
+		return results;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(new GenSearchTree().numTrees(3));
+		//System.out.println(new GenSearchTree().numTrees(3));
+		//System.out.println(new GenSearchTree().generateTrees(3));
+
 	}
 
 }
