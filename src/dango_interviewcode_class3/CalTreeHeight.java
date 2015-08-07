@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 import dango_interviewcode_class3.NearestCommonAncestor.Node;
 
+/**
+ * @author zjd
+ * 计算树的高度
+ */
 public class CalTreeHeight {
 	
 	class Node{

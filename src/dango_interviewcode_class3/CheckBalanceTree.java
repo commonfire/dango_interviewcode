@@ -24,6 +24,10 @@ class Height{
 }
 
 
+/**
+ * @author zjd
+ * 判断是否为平衡二叉树
+ */
 public class CheckBalanceTree {
 	
 	private int max(int a,int b){
@@ -55,7 +59,6 @@ public class CheckBalanceTree {
 		root.left.left = nodelist.get(3);
 		root.left.right = nodelist.get(4);
 		root.left.left.left = nodelist.get(5);
-		
 		return root;
 	}
 	

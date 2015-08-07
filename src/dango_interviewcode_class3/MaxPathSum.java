@@ -3,6 +3,10 @@ package dango_interviewcode_class3;
 import java.util.LinkedList;
 
 
+/**
+ * @author zjd
+ * 计算最大路径和
+ */
 public class MaxPathSum {	
 	int ans;  //保存答案
 
