@@ -3,8 +3,7 @@ package dango_interviewcode_class3;
 import java.util.LinkedList;
 
 
-public class MaxPathSum {	
-	int ans;  //保存答案
+public class CheckSameTree {
 
 	class Node{ 
 		int val;          //节点value值
@@ -15,12 +14,6 @@ public class MaxPathSum {
 			left = null;
 			right = null;
 	 }
-	}
-	
-	private int max(int a,int b){
-		int max = a;
-		if (b>=a) max=b;
-		return max;
 	}
 	
 	/**
@@ -50,32 +43,30 @@ public class MaxPathSum {
 	}
 	
 	/**
-	 * 获取以某个“根”节点的最大“链”（可能是来自左子链或右子链）
-	 * @param root   遍历的“根”节点
-	 * @return       某个“根”节点的最大“链”的最大值     
+	 * 判读两棵树是否为同一棵树，即结构相同且对应节点的值相同
+	 * @param root1           树1
+	 * @param root2           树2
+  	 * @return         判断两棵树是否相同的结果
 	 */
-	private int solve(Node root){
-		if(root == null) return 0;
-		int sum = root.val;
-		int left = solve(root.left),right = solve(root.right);
-		if(left > 0) sum += left;
-		if(right > 0) sum += right;
-		ans = max(ans,sum);
-		return max(0,max(left,right))+root.val;   //若left，right都为负，则不继续向下走
+	private boolean checkSameTree(Node root1,Node root2){
+		if(root1 == null && root2 == null) return true;
+		if(root1 == null || root2 == null) return false;
+		if(root1.val == root2.val){
+			boolean checkleft = checkSameTree(root1.left, root2.left);
+			boolean checkright = checkSameTree(root1.right, root2.right);
+			return checkleft&&checkright;
+		}
+		else return false;
 	}
 	
-	private int maxPathSum(Node root){
-		ans = Integer.MIN_VALUE;  
-		solve(root);
-		return ans;
-	}
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] a = new int[]{0,1,2,3,4,5};
-		Node root = new MaxPathSum().createTree(a);
-		int result = new MaxPathSum().maxPathSum(root);
-		System.out.println(result);
+		int[] b = new int[]{0,1,6,8,4,5};
+		Node root1 = new CheckSameTree().createTree(a);
+		Node root2 = new CheckSameTree().createTree(b);
+		System.out.println(new CheckSameTree().checkSameTree(root1, root2));
 	}
 
 }
