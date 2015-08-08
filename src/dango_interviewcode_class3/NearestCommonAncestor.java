@@ -12,14 +12,14 @@ public class NearestCommonAncestor {
 	 * @author zjd
 	 * 定义树的节点结构
 	 */
-	class  Node{
-		Node[] children;  //某节点的孩子节点 
-		Node father;      //某节点的父节点
+	class TreeNode{
+		TreeNode[] children;  //某节点的孩子节点 
+		TreeNode father;      //某节点的父节点
 		int num;          //节点标号
-		public Node(int num){
+		public TreeNode(int num){
 			this.num = num;
 			father = null;
-			children = new Node[]{null,null};
+			children = new TreeNode[]{null,null};
 		}
 	}
 	
@@ -36,12 +36,12 @@ public class NearestCommonAncestor {
 	 *  4
 	 *    
 	 */
-	private  Node createTree(int[]a){
-		LinkedList<Node> nodelist = new LinkedList<>();
+	private  TreeNode createTree(int[]a){
+		LinkedList<TreeNode> nodelist = new LinkedList<>();
 		for(int i = 0;i<a.length;i++){
-			nodelist.add(new Node(a[i]));
+			nodelist.add(new TreeNode(a[i]));
 		}
-		Node root = nodelist.get(0);
+		TreeNode root = nodelist.get(0);
 		nodelist.get(1).father = root;
 		nodelist.get(2).father = nodelist.get(1);
 		nodelist.get(3).father = nodelist.get(1);
@@ -60,9 +60,9 @@ public class NearestCommonAncestor {
 	 * @param node2           树上节点2
 	 * @return         最近公共祖先节点
 	 */
-	private static Node calComAncestor(Node node1,Node node2){
+	private static TreeNode calComAncestor(TreeNode node1,TreeNode node2){
 		int length1 = 0,length2 = 0;   //分别以node1和node2为起点的构成的“链表”长度(节点数)
-		Node now = node1;              //node1拷贝到now
+		TreeNode now = node1;              //node1拷贝到now
 		while(now!=null){
 			length1++;
 			now = now.father;
@@ -90,8 +90,8 @@ public class NearestCommonAncestor {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] a = new int[]{0,1,2,3,4};
-		Node tree = new NearestCommonAncestor().createTree(a);
-		Node result = calComAncestor(tree.children[0].children[0], tree.children[0].children[1]);
+		TreeNode tree = new NearestCommonAncestor().createTree(a);
+		TreeNode result = calComAncestor(tree.children[0].children[0], tree.children[0].children[1]);
 		System.out.println(result.num);
 		
 	}

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 /**
  * @author zjd
- * 判断是否为排序（搜索）二叉树
+ * 判断是否为排序（搜索）二叉树（BST）
  */
 public class CheckSearchTree {
 	
@@ -21,12 +21,12 @@ public class CheckSearchTree {
 	 *   /
 	 *  5
 	 */
-	private Node createTree(int[]a){
-		LinkedList<Node> nodelist = new LinkedList<>();
+	private TreeNode createTree(int[]a){
+		LinkedList<TreeNode> nodelist = new LinkedList<>();
 		for(int i = 0;i<a.length;i++){
-			nodelist.add(new Node(a[i]));
+			nodelist.add(new TreeNode(a[i]));
 		}
-		Node root = nodelist.get(0);
+		TreeNode root = nodelist.get(0);
 		root.left = nodelist.get(1);
 		root.right = nodelist.get(2);
 		root.left.left = nodelist.get(3);
@@ -35,23 +35,12 @@ public class CheckSearchTree {
 		return root;
 	}
 	
-	private int max(int a,int b){
-		int max = a;
-		if (b>=a) max=b;
-		return max;
-	}
 	
-	private int min(int a,int b){
-		int min = a;
-		if (b<=a) min=b;
-		return min;
-	}
-	
-	class Node{ 
+	class TreeNode{ 
 		int val;          //节点value值
-		Node left;
-		Node right;
-		public Node(int val){
+		TreeNode left;
+		TreeNode right;
+		public TreeNode(int val){
 			this.val = val;
 			left = null;
 			right = null;
@@ -65,22 +54,22 @@ public class CheckSearchTree {
 	 * @param maxv    当前树应小于的最大值
 	 * @return
 	 */
-	private boolean checkSearchTree(Node root,int minv,int maxv){
+	private boolean checkSearchTree(TreeNode root,long minv,long maxv){
 		if(root == null) return true;
 		if(root.val > maxv || root.val < minv) return false;  //判断的边界条件
-		if(!checkSearchTree(root.left, minv, min(maxv,root.val-1))) return false;
-		if(!checkSearchTree(root.right, max(minv,root.val+1), maxv)) return false;
+		if(!checkSearchTree(root.left, minv, root.val-(long)1)) return false;
+		if(!checkSearchTree(root.right, root.val+1l, maxv)) return false;
 		return true;
 	}
 	
-	private boolean isSearchTree(Node root){
+	private boolean isSearchTree(TreeNode root){
 		return checkSearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] a = new int[]{0,1,2,3,4,5};
-		Node root = new CheckSearchTree().createTree(a);
+		TreeNode root = new CheckSearchTree().createTree(a);
 		System.out.println(new CheckSearchTree().isSearchTree(root));
 	}
 

@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class GenSearchTree {
 	
-	class Node{ 
+	class TreeNode{ 
 		int val;          //节点value值
-		Node left;
-		Node right;
-		public Node(int val){
+		TreeNode left;
+		TreeNode right;
+		public TreeNode(int val){
 			this.val = val;
 			left = null;
 			right = null;
@@ -46,21 +46,21 @@ public class GenSearchTree {
 	 * @param n    给定的n
 	 * @return     返回所有可能的排序二叉树
 	 */
-	private ArrayList<Node> generateTrees(int n){
+	private ArrayList<TreeNode> generateTrees(int n){
 		return createTree(1, n);
 	}
 	
-	private ArrayList<Node> createTree(int start,int end){
-		ArrayList<Node> results = new ArrayList<Node>();
+	private ArrayList<TreeNode> createTree(int start,int end){
+		ArrayList<TreeNode> results = new ArrayList<TreeNode>();
 		if(start > end){
 			results.add(null);
 			return results;
 		}
 		for(int k = start;k <= end;k++){
-			ArrayList<Node> left = createTree(start, k-1);
-			ArrayList<Node> right = createTree(k+1, end);
+			ArrayList<TreeNode> left = createTree(start, k-1);
+			ArrayList<TreeNode> right = createTree(k+1, end);
 			for(int i=0,j=0;i<left.size()&&j<right.size();i++,j++){
-				Node root = new Node(k);
+				TreeNode root = new TreeNode(k);
 				root.left = left.get(i);
 				root.right = right.get(j);
 				results.add(root);
@@ -73,7 +73,6 @@ public class GenSearchTree {
 		// TODO Auto-generated method stub
 		//System.out.println(new GenSearchTree().numTrees(3));
 		//System.out.println(new GenSearchTree().generateTrees(3));
-
 	}
 
 }

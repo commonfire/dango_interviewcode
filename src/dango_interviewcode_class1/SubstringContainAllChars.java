@@ -2,12 +2,6 @@ package dango_interviewcode_class1;
 
 public class SubstringContainAllChars {
 	
-	private static int min(int a ,int b){
-		int min = a;
-		if (b<=a) min = b;
-		return min;
-	}
-	
 	
 	/**
 	 * 获取包含指定字符集中所有字符的最短子串
@@ -33,7 +27,7 @@ public class SubstringContainAllChars {
 			}
 			if (occur<s.length())break;  //t中不再包含字符集s中字符
 
-			result = min(result,pivot-i);
+			result = Math.min(result,pivot-i);
 			
 			int key = t.charAt(i)-'a';
 			for(int j=0;j<s.length();j++){

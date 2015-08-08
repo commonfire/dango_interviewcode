@@ -10,22 +10,17 @@ import java.util.LinkedList;
 public class MaxPathSum {	
 	int ans;  //保存答案
 
-	class Node{ 
+	class TreeNode{ 
 		int val;          //节点value值
-		Node left;
-		Node right;
-		public Node(int val){
+		TreeNode left;
+		TreeNode right;
+		public TreeNode(int val){
 			this.val = val;
 			left = null;
 			right = null;
 	 }
 	}
-	
-	private int max(int a,int b){
-		int max = a;
-		if (b>=a) max=b;
-		return max;
-	}
+ 
 	
 	/**
 	 * @param a   构造树的数组
@@ -39,12 +34,12 @@ public class MaxPathSum {
 	 *   /
 	 *  5
 	 */
-	private Node createTree(int[]a){
-		LinkedList<Node> nodelist = new LinkedList<>();
+	private TreeNode createTree(int[]a){
+		LinkedList<TreeNode> nodelist = new LinkedList<>();
 		for(int i = 0;i<a.length;i++){
-			nodelist.add(new Node(a[i]));
+			nodelist.add(new TreeNode(a[i]));
 		}
-		Node root = nodelist.get(0);
+		TreeNode root = nodelist.get(0);
 		root.left = nodelist.get(1);
 		root.right = nodelist.get(2);
 		root.left.left = nodelist.get(3);
@@ -58,17 +53,17 @@ public class MaxPathSum {
 	 * @param root   遍历的“根”节点
 	 * @return       某个“根”节点的最大“链”的最大值     
 	 */
-	private int solve(Node root){
+	private int solve(TreeNode root){
 		if(root == null) return 0;
 		int sum = root.val;
 		int left = solve(root.left),right = solve(root.right);
 		if(left > 0) sum += left;
 		if(right > 0) sum += right;
-		ans = max(ans,sum);
-		return max(0,max(left,right))+root.val;   //若left，right都为负，则不继续向下走
+		ans = Math.max(ans,sum);
+		return Math.max(0,Math.max(left,right))+root.val;   //若left，right都为负，则不继续向下走
 	}
 	
-	private int maxPathSum(Node root){
+	private int maxPathSum(TreeNode root){
 		ans = Integer.MIN_VALUE;  
 		solve(root);
 		return ans;
@@ -77,7 +72,7 @@ public class MaxPathSum {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] a = new int[]{0,1,2,3,4,5};
-		Node root = new MaxPathSum().createTree(a);
+		TreeNode root = new MaxPathSum().createTree(a);
 		int result = new MaxPathSum().maxPathSum(root);
 		System.out.println(result);
 	}
