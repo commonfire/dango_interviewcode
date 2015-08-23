@@ -59,11 +59,13 @@ public class GenSearchTree {
 		for(int k = start;k <= end;k++){
 			ArrayList<TreeNode> left = createTree(start, k-1);
 			ArrayList<TreeNode> right = createTree(k+1, end);
-			for(int i=0,j=0;i<left.size()&&j<right.size();i++,j++){
-				TreeNode root = new TreeNode(k);
-				root.left = left.get(i);
-				root.right = right.get(j);
-				results.add(root);
+			for(int i=0;i<left.size();i++){
+				for(int j=0;j<right.size();j++){
+					TreeNode root = new TreeNode(k);
+					root.left = left.get(i);
+					root.right = right.get(j);
+					results.add(root);
+				}
 			}
 		}
 		return results;
