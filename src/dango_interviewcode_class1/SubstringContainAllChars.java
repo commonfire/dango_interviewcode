@@ -14,21 +14,32 @@ public class SubstringContainAllChars {
 		int occur = 0;  //纪录字符串t中出现字符集s的情况
 		int pivot = 0;
 		int result = Integer.MAX_VALUE;   //满足条件的最短子串长度
+		String subStr = "";
 		for (int i=0;i<t.length();i++){
 			while(pivot<t.length()&&occur<s.length()){
 				int key = t.charAt(pivot)-'a';
-				if(counter[key]==0) occur++;
-				counter[key]++;
+				for(int j=0;j<s.length();j++){
+						if(key == s.charAt(j)-'a'){
+							if(counter[key]==0) occur++;
+							counter[key]++;
+						}
+					}
 				pivot++;
 			}
 			if (occur<s.length())break;  //t中不再包含字符集s中字符
 
+			if((pivot - i)<result) subStr = t.substring(i, pivot);
 			result = Math.min(result,pivot-i);
 			
-			int key = t.charAt(i)-'a';   //处理第i位情况，用于下一步i+1起点的处理
-			counter[key]--;
-			if(counter[key]==0) occur--;
+			int key = t.charAt(i)-'a';   //处理第i位情况，用于下一步i+1起点的处理			
+			for(int j=0;j<s.length();j++){
+					if(key==s.charAt(j)-'a'){
+						counter[key]--;
+						if(counter[key]==0) occur--;
+					}
+				}			
 		}
+		System.out.println("result is: "+subStr);
 		return result == Integer.MAX_VALUE ? -1 : result;
 	}
 	
