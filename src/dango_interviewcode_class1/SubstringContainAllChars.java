@@ -17,12 +17,8 @@ public class SubstringContainAllChars {
 		for (int i=0;i<t.length();i++){
 			while(pivot<t.length()&&occur<s.length()){
 				int key = t.charAt(pivot)-'a';
-				for(int j=0;j<s.length();j++){
-					if(key == s.charAt(j)-'a'){
-						if(counter[key]==0) occur++;
-						counter[key]++;
-					}
-				}
+				if(counter[key]==0) occur++;
+				counter[key]++;
 				pivot++;
 			}
 			if (occur<s.length())break;  //t中不再包含字符集s中字符
@@ -30,12 +26,8 @@ public class SubstringContainAllChars {
 			result = Math.min(result,pivot-i);
 			
 			int key = t.charAt(i)-'a';
-			for(int j=0;j<s.length();j++){
-				if(key==s.charAt(j)-'a'){
-					counter[key]--;
-					if(counter[key]==0) occur--;
-				}
-			}
+			counter[key]--;
+			if(counter[key]==0) occur--;
 		}
 		return result == Integer.MAX_VALUE ? -1 : result;
 	}
