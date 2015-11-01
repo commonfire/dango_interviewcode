@@ -25,7 +25,7 @@ public class SubstringContainAllChars {
 
 			result = Math.min(result,pivot-i);
 			
-			int key = t.charAt(i)-'a';
+			int key = t.charAt(i)-'a';   //处理第i位情况，用于下一步i+1起点的处理
 			counter[key]--;
 			if(counter[key]==0) occur--;
 		}
